@@ -1,0 +1,40 @@
+AppBundle\Entity\Country:
+    type: entity
+    table: 	countries
+    repositoryClass: AppBundle\Repository\CountryRepository
+
+    oneToMany:
+        states:
+          targetEntity: State
+          mappedBy: country
+
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        countryName:
+            column: country_name
+            nullable: true
+            type: string
+            length: '255'
+        countryCode:
+            column: country_code
+            nullable: true
+            type: string
+            length: '255'
+        countryCurrency:
+            column: country_currency
+            nullable: true
+            type: string
+            length: '255'
+        countryCurrencyShort:
+            column: country_currency_short
+            nullable: true
+            type: string
+            length: '255'
+
+    lifecycleCallbacks: {  }

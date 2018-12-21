@@ -1,0 +1,44 @@
+AppBundle\Entity\Message:
+    type: entity
+    table: messages
+    repositoryClass: AppBundle\Repository\MessageRepository
+
+
+    manyToOne:
+        user:
+          targetEntity: User
+          joinColumn:
+            name: user_id
+            referencedColumnName: id
+        contact:
+          targetEntity: Contact
+          inversedBy: messages
+          joinColumn:
+            name: contact_id
+            referencedColumnName: id
+
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        messageBody:
+            column: message_body
+            nullable: true
+            type: string
+            length: '255'
+        messageType:
+            column: message_type
+            nullable: true
+            type: string
+            length: '50'
+        messageDateTime:
+            column: message_datetime
+            type: datetime
+
+
+
+    lifecycleCallbacks: {  }

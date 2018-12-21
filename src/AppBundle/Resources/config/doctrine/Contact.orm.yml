@@ -1,0 +1,62 @@
+AppBundle\Entity\Contact:
+    type: entity
+    table: contact
+    repositoryClass: AppBundle\Repository\ContactRepository
+
+    oneToMany:
+        messages:
+            targetEntity: Message
+            mappedBy: contact
+            cascade: [persist,remove]
+
+    manyToOne:
+        bookDeal:
+            targetEntity: BookDeal
+            inversedBy: contacts
+            joinColumn:
+              name: book_deal_id
+              referencedColumnName: id
+
+        buyer:
+            targetEntity: User
+            inversedBy: contacts
+            joinColumn:
+              name: buyer_id
+              referencedColumnName: id
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        buyerNickName:
+            nullable: true
+            type: string
+            length: '100'
+        buyerEmail:
+            type: string
+            length: '100'
+        buyerHomePhone:
+            nullable: true
+            type: string
+            length: '25'
+        buyerCellPhone:
+            nullable: true
+            type: string
+            length: '25'
+        contactCondition:
+            nullable: true
+            type: string
+            length: '25'
+        contactDateTime:
+            column: contact_datetime
+            type: datetime
+        soldToThatBuyer:
+            column: sold_to_that_buyer
+            type: string
+            length: '25'
+            options:
+                default: 'No'
+    lifecycleCallbacks: {  }

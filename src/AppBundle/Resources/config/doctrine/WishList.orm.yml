@@ -1,0 +1,26 @@
+AppBundle\Entity\WishList:
+    type: entity
+    table: wish_list
+    repositoryClass: AppBundle\Repository\WishListRepository
+
+    manyToOne:
+        user:
+            targetEntity: User
+            inversedBy: wishLists
+            joinColumn:
+              name: user_id
+              referencedColumnName: id
+        book:
+            targetEntity: Book
+            joinColumn:
+              name: book_id
+              referencedColumnName: id
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+
+    lifecycleCallbacks: {  }

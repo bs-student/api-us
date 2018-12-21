@@ -1,0 +1,33 @@
+AppBundle\Entity\Quote:
+    type: entity
+    table: quotes
+    repositoryClass: AppBundle\Repository\QuoteRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        quoteType:
+            column: quote_type
+            type: string
+            length: '30'
+        quoteDescription:
+            column: quote_description
+            type: text
+        quoteImage:
+            column: quote_image
+            type: text
+        quoteProvider:
+            column: quote_provider
+            type: string
+            length: '255'
+        quoteStatus:
+            column: quote_status
+            type: string
+            length: '255'
+            nullable: true
+            options:
+                default: 'Activated'
+    lifecycleCallbacks: {  }

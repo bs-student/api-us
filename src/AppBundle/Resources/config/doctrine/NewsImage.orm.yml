@@ -1,0 +1,24 @@
+AppBundle\Entity\NewsImage:
+    type: entity
+    table: news_images
+    repositoryClass: AppBundle\Repository\NewsImageRepository
+
+    manyToOne:
+        news:
+            targetEntity: News
+            inversedBy: newsImages
+            joinColumn:
+                name: news_id
+                referencedColumnName: id
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        newsImageUrl:
+            type: string
+            length: '255'
+    lifecycleCallbacks: {  }

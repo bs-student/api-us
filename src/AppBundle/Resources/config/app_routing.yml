@@ -1,0 +1,721 @@
+
+# WEB CONTROLLER ROUTES
+
+
+#Security Controller
+home:
+    path:      /
+    defaults:  { _controller: AppBundle:Security:index }
+
+login:
+    path:      /login
+    defaults:  { _controller: AppBundle:Security:login }
+
+
+#Reasetting Controller
+reset_password:
+    path: /resetting/reset/{token}
+    defaults: {_controller: AppBundle:Resetting:reset}
+    methods: [POST,GET]
+
+reset_password_check_token:
+    path: /resetting/check_token/{token}
+    defaults: {_controller: AppBundle:Resetting:checkToken}
+    methods: [POST,GET]
+
+resetting_password_send_email:
+    path: /resetting/send-email
+    defaults: {_controller: AppBundle:Resetting:sendEmail}
+    methods: [POST]
+
+#Registration Controller
+check_if_username_exist:
+    path: /check_if_username_exist
+    defaults:  {_controller: AppBundle:Registration:checkIfUsernameExist}
+    methods: [POST]
+
+check_if_email_exist:
+    path: /check_if_email_exist
+    defaults:  {_controller: AppBundle:Registration:checkIfEmailExist}
+    methods: [POST]
+
+user_registration:
+    path: /register
+    defaults:  {_controller: AppBundle:Registration:register}
+
+fos_user_registration_check_email:
+    path: /check-email
+    defaults: {_controller: AppBundle:Registration:checkEmail}
+
+user_registration_confirm:
+    path: /confirm/{token}
+    defaults: {_controller: AppBundle:Registration:confirm}
+    methods: [GET]
+
+fos_user_registration_confirmed:
+    path: /confirmed
+    defaults: {_controller: AppBundle:Registration:confirmed}
+
+confirmation_token_expired:
+    path: /confirmation_token_expired
+    defaults: {_controller: AppBundle:Registration:confirmationTokenExpired}
+
+#SocialRegistrationController
+
+social_user_registration:
+    path: /social_register
+    defaults: {_controller: AppBundle:SocialRegistration:socialRegister}
+    methods: [POST,GET]
+
+auth_google:
+    path: /auth/google
+    defaults: {_controller: AppBundle:SocialRegistration:authGoogle}
+    methods: [POST]
+
+auth_facebook:
+    path: /auth/facebook
+    defaults: {_controller: AppBundle:SocialRegistration:authFacebook}
+    methods: [POST]
+
+update_social_user:
+    path: /update_social_user
+    defaults: {_controller: AppBundle:SocialRegistration:updateSocialUser}
+    methods: [POST]
+
+#ChangePasswordController
+change_password:
+    path: /profile/change-password
+    defaults: {_controller: AppBundle:ChangePassword:changePassword}
+    methods: [POST,GET]
+
+
+
+
+
+
+
+# API CONTROLLER ROUTES
+
+
+
+
+#UserApiController
+
+current_user_short_details:
+    path: /api/current_user_short_details
+    defaults:  {_controller: AppBundle:Api/UserApi:currentUserShortDetails}
+
+current_user_full_details:
+    path: /api/current_user_full_details
+    defaults:  {_controller: AppBundle:Api/UserApi:currentUserFullDetails}
+
+admin_all_users:
+    path: /api/admin/all_users
+    defaults:  {_controller: AppBundle:Api/UserApi:adminAllUsers}
+
+
+update_user_profile:
+    path: /api/update_user_profile
+    defaults:  {_controller: AppBundle:Api/UserApi:updateUserProfile}
+    methods: [POST]
+
+update_user_email_notification_status:
+    path: /api/update_user_email_notification_status
+    defaults:  {_controller: AppBundle:Api/UserApi:updateUserEmailNotification}
+    methods: [POST]
+
+
+#BookManagementApiController
+
+books_search_by_keyword_amazon:
+    path: /book/search_by_keyword_amazon
+    defaults:  {_controller: AppBundle:Api/BookManagementApi:searchByKeywordAmazonApi}
+    methods: [POST]
+
+books_search_by_keyword_amazon_api:
+    path: /api/book/search_by_keyword_amazon_api
+    defaults:  {_controller: AppBundle:Api/BookManagementApi:searchByKeywordAmazonApiWithApiCall}
+    methods: [POST]
+
+books_search_by_asin_amazon:
+    path: /book/search_by_asin_amazon
+    defaults:  {_controller: AppBundle:Api/BookManagementApi:searchByAsinAmazonApi}
+    methods: [POST]
+
+books_search_by_isbn_amazon:
+    path: /api/book/search_by_isbn_amazon
+    defaults:  {_controller: AppBundle:Api/BookManagementApi:searchByIsbnAmazonApi}
+    methods: [POST]
+
+books_search_by_isbn_campus_books:
+    path: /book/search_by_isbn_campus_books
+    defaults:  {_controller: AppBundle:Api/BookManagementApi:searchByIsbnCampusBooksApi}
+    methods: [POST]
+
+get_lowest_online_price_campus_books_by_isbn:
+    path: /book/get_lowest_price_by_isbn_campus_books
+    defaults:  {_controller: AppBundle:Api/BookManagementApi:getLowestPriceByIsbnCampusBooksApi}
+    methods: [GET]
+
+get_amazon_cart_create_url:
+    path: /book/get_amazon_cart_create_url
+    defaults:  {_controller: AppBundle:Api/BookManagementApi:getAmazonCartCreateUrl}
+    methods: [POST]
+
+get_campus_deals_by_isbn_api:
+    path: /api/book/get_campus_deals_by_isbn_api
+    defaults:  {_controller: AppBundle:Api/BookManagementApi:getCampusDealsByIsbnApi}
+    methods: [POST]
+
+get_campus_deals_by_isbn:
+    path: /book/get_campus_deals_by_isbn
+    defaults:  {_controller: AppBundle:Api/BookManagementApi:getCampusDealsByIsbn}
+    methods: [POST]
+
+#get_on_campus_deals_by_isbn:
+#    path: /api/book/get_on_campus_deals_by_isbn
+#    defaults:  {_controller: AppBundle:Api/BookManagementApi:getOnCampusDealsByIsbn}
+#    methods: [POST]
+
+
+add_new_sell_book:
+    path: /api/book/add_new_sell_book
+    defaults:  {_controller: AppBundle:Api/BookManagementApi:addNewSellBook}
+    methods: [POST]
+
+add_new_custom_sell_book:
+    path: /api/book/add_new_custom_sell_book
+    defaults:  {_controller: AppBundle:Api/BookManagementApi:addNewCustomSellBook}
+    methods: [POST]
+
+
+#CampusManagementApiController
+
+campus_list_by_university:
+    path: /api/campus/list
+    defaults:  {_controller: AppBundle:Api/CampusManagementApi:campusListByUniversity}
+    methods: [POST]
+
+campus_details_with_university_and_state:
+    path: /campus/details_with_university_and_state
+    defaults:  {_controller: AppBundle:Api/CampusManagementApi:campusDetailsWithUniversityAndState}
+    methods: [POST]
+
+update_campus:
+    path: /api/campus/update
+    defaults:  {_controller: AppBundle:Api/CampusManagementApi:updateCampus}
+    methods: [POST]
+
+save_new_campus:
+    path: /api/campus/add
+    defaults:  {_controller: AppBundle:Api/CampusManagementApi:saveNewCampus}
+    methods: [POST]
+
+delete_university:
+    path: /api/university/delete
+    defaults:  {_controller: AppBundle:Api/CampusManagementApi:deleteUniversity}
+    methods: [POST]
+
+
+#CountryManagementApiController
+
+all_countries:
+    path: /country/list
+    defaults:  {_controller: AppBundle:Api/CountryManagementApi:countryList}
+
+all_countries_api:
+    path: /api/country/list
+    defaults:  {_controller: AppBundle:Api/CountryManagementApi:countryListAdmin}
+
+#ReferralManagementApiController
+
+all_referrals_api:
+    path: /api/referral/list
+    defaults:  {_controller: AppBundle:Api/ReferralManagementApi:referralListAdmin}
+
+all_referrals:
+    path: /referral/list
+    defaults:  {_controller: AppBundle:Api/ReferralManagementApi:referralList}
+
+
+#StateManagementApiController
+
+all_states_by_country:
+    path: /state/list_by_country
+    defaults:  {_controller: AppBundle:Api/StateManagementApi:statesByCountry}
+    methods: [POST]
+
+all_states_by_country_api:
+    path: /api/state/list_by_country
+    defaults:  {_controller: AppBundle:Api/StateManagementApi:statesByCountryAdmin}
+    methods: [POST]
+
+#UniversityManagementApiController
+
+university_list:
+    path: /university/autocomplete_activated_search_list
+    defaults:  {_controller: AppBundle:Api/UniversityManagementApi:universityAutocompleteActivatedSearchList}
+    methods: [POST]
+
+university_name_list:
+    path: /api/university/autocomplete_university_name_search_list
+    defaults:  {_controller: AppBundle:Api/UniversityManagementApi:universityAutocompleteNameSearchList}
+    methods: [POST]
+
+university_search:
+    path: /api/university/search
+    defaults:  {_controller: AppBundle:Api/UniversityManagementApi:universitySearchAdmin}
+    methods: [POST]
+
+update_university:
+    path: /api/university/update_university
+    defaults:  {_controller: AppBundle:Api/UniversityManagementApi:updateUniversity}
+    methods: [POST]
+
+save_new_university:
+    path: /university/save_new_university
+    defaults:  {_controller: AppBundle:Api/UniversityManagementApi:saveNewUniversity}
+    methods: [POST]
+
+
+save_new_university_logged_in_user:
+    path: /api/university/save_new_university_logged_in_user
+    defaults:  {_controller: AppBundle:Api/UniversityManagementApi:saveNewUniversityLoggedInUser}
+    methods: [POST]
+
+delete_university:
+    path: /api/university/delete
+    defaults:  {_controller: AppBundle:Api/UniversityManagementApi:deleteUniversity}
+    methods: [POST]
+
+
+# Admin Univesity Management Api Controller
+
+get_all_non_approved_universities:
+    path: /api/admin/get_all_non_approved_universities
+    defaults:  {_controller: AppBundle:Api/AdminUniversityManagementApi:getAllNonApprovedUniversities}
+    methods: [POST]
+
+get_all_activated_universities:
+    path: /api/admin/get_all_activated_universities
+    defaults:  {_controller: AppBundle:Api/AdminUniversityManagementApi:getAllActivatedUniversities}
+    methods: [POST]
+
+get_all_deactivated_universities:
+    path: /api/admin/get_all_deactivated_universities
+    defaults:  {_controller: AppBundle:Api/AdminUniversityManagementApi:getAllDeactivatedUniversities}
+    methods: [POST]
+
+save_edited_university_data_only:
+    path: /api/admin/save_edited_university_data_only
+    defaults:  {_controller: AppBundle:Api/AdminUniversityManagementApi:saveEditedUniversityDataOnly}
+    methods: [POST]
+
+approve_multiple_universities:
+    path: /api/admin/approve_multiple_universities
+    defaults:  {_controller: AppBundle:Api/AdminUniversityManagementApi:approveMultipleUniversities}
+    methods: [POST]
+
+update_university_details:
+    path: /api/admin/update_university_details
+    defaults:  {_controller: AppBundle:Api/AdminUniversityManagementApi:updateUniversityDetails}
+    methods: [POST]
+
+get_all_similar_universities:
+    path: /api/admin/get_all_similar_universities
+    defaults:  {_controller: AppBundle:Api/AdminUniversityManagementApi:getAllSimilarUniversities}
+    methods: [POST]
+
+merge_universities:
+    path: /api/admin/merge_universities
+    defaults:  {_controller: AppBundle:Api/AdminUniversityManagementApi:mergeUniversities}
+    methods: [POST]
+
+#ContactManagementApiController
+
+add_contact_api:
+    path: /api/contact/add_contact_api
+    defaults:  {_controller: AppBundle:Api/ContactManagementApi:addNewContactApi}
+    methods: [POST]
+
+add_contact:
+    path: /contact/add_contact
+    defaults:  {_controller: AppBundle:Api/ContactManagementApi:addNewContact}
+    methods: [POST]
+
+get_messages:
+    path: /api/contact/get_messages
+    defaults:  {_controller: AppBundle:Api/ContactManagementApi:getMessages}
+    methods: [POST]
+
+send_messages:
+    path: /api/contact/send_messages
+    defaults:  {_controller: AppBundle:Api/ContactManagementApi:sendMessages}
+    methods: [POST]
+
+send_messages_without_mailing:
+    path: /api/contact/send_messages_without_mailing
+    defaults:  {_controller: AppBundle:Api/ContactManagementApi:sendMessagesWithoutMailing}
+    methods: [POST]
+
+#BookDealManagementApiController
+
+get_book_deals_i_have_contacted_for:
+    path: /api/book_deal/get_book_deals_i_have_contacted_for
+    defaults:  {_controller: AppBundle:Api/BookDealManagementApi:getBooksIHaveContactedFor}
+    methods: [POST]
+
+get_book_deals_i_have_created:
+    path: /api/book_deal/get_book_deals_i_have_created
+    defaults:  {_controller: AppBundle:Api/BookDealManagementApi:getBooksIHaveCreated}
+    methods: [POST]
+
+sell_book_to_user:
+    path: /api/book_deal/sell_book_to_user
+    defaults:  {_controller: AppBundle:Api/BookDealManagementApi:sellBookToUser}
+    methods: [POST]
+
+get_book_deals_i_have_created_and_sold:
+    path: /api/book_deal/get_book_deals_i_have_created_and_sold
+    defaults:  {_controller: AppBundle:Api/BookDealManagementApi:getBooksIHaveCreatedAndSold}
+    methods: [POST]
+
+get_book_deals_i_have_bought:
+    path: /api/book_deal/get_book_deals_i_have_bought
+    defaults:  {_controller: AppBundle:Api/BookDealManagementApi:getBooksIHaveBought}
+    methods: [POST]
+
+change_book_deal_status:
+    path: /api/book_deal/change_book_deal_status
+    defaults:  {_controller: AppBundle:Api/BookDealManagementApi:changeBookDealStatus}
+    methods: [POST]
+
+get_lowest_campus_deal_price:
+    path: /api/book_deal/get_lowest_campus_deal_price
+    defaults:  {_controller: AppBundle:Api/BookDealManagementApi:getLowestCampusDealPrice}
+    methods: [POST]
+
+update_book_deal:
+    path: /api/book_deal/update_book_deal
+    defaults:  {_controller: AppBundle:Api/BookDealManagementApi:updateBookDeal}
+    methods: [POST]
+
+delete_book_deal:
+    path: /api/book_deal/delete_book_deal
+    defaults:  {_controller: AppBundle:Api/BookDealManagementApi:deleteBookDeal}
+    methods: [POST]
+
+get_activated_book_deal_of_user:
+    path: /book_deal/get_activated_book_deal_of_user
+    defaults:  {_controller: AppBundle:Api/BookDealManagementApi:getActivatedBookDealOfUser}
+    methods: [POST]
+
+get_all_activated_deals_for_message_board:
+    path: /api/book_del/get_all_activated_deals_for_message_board
+    defaults:  {_controller: AppBundle:Api/BookDealManagementApi:getAllActivatedDealsForMessageBoard}
+    methods: [POST]
+
+get_all_data_for_new_contact_in_message_board:
+    path: /api/star/get_all_data_for_new_contact_in_message_board
+    defaults:  {_controller: AppBundle:Api/BookDealManagementApi:getAllDataForNewContactInMessageBoard}
+    methods: [POST]
+
+
+
+#WishList Management Api Controller
+
+add_book_to_wish_list:
+    path: /api/wishlist/add_book_to_wish_list
+    defaults:  {_controller: AppBundle:Api/WishListManagementApi:addBookToWishList}
+    methods: [POST]
+
+get_my_wishlist:
+    path: /api/wishlist/get_my_wishlist
+    defaults:  {_controller: AppBundle:Api/WishListManagementApi:getMyWishList}
+    methods: [GET]
+
+remove_wishlist_item:
+    path: /api/wishlist/remove_wishlist_item
+    defaults:  {_controller: AppBundle:Api/WishListManagementApi:removeWishListItem}
+    methods: [POST]
+
+check_if_added_into_wishlist:
+    path: /api/wishlist/check_if_added_into_wishlist
+    defaults:  {_controller: AppBundle:Api/WishListManagementApi:checkIfAddedIntoWishlist}
+    methods: [POST]
+
+#Admin User Api Controller
+
+get_all_non_approved_user:
+    path: /api/admin/get_all_non_approved_user
+    defaults:  {_controller: AppBundle:Api/AdminUserApi:getAllNonApprovedUser}
+    methods: [POST]
+
+get_all_approved_user:
+    path: /api/admin/get_all_approved_user
+    defaults:  {_controller: AppBundle:Api/AdminUserApi:getAllApprovedUser}
+    methods: [POST]
+
+get_all_admin_user:
+    path: /api/admin/get_all_admin_user
+    defaults:  {_controller: AppBundle:Api/AdminUserApi:getAllAdminUser}
+    methods: [POST]
+
+admin_update_users:
+    path: /api/admin/update_user_data
+    defaults:  {_controller: AppBundle:Api/AdminUserApi:adminUpdateUserData}
+    methods: [POST]
+
+approve_users:
+    path: /api/admin/approve_users
+    defaults:  {_controller: AppBundle:Api/AdminUserApi:approveUsers}
+    methods: [POST]
+
+add_admin_user:
+    path: /api/admin/add_admin_user
+    defaults:  {_controller: AppBundle:Api/AdminUserApi:addAdminUser}
+    methods: [POST]
+
+#Admin BookDeal Api Controller
+
+get_all_book_deals:
+    path: /api/admin/get_all_book_deals
+    defaults:  {_controller: AppBundle:Api/AdminBookDealApi:getAllBookDeals}
+    methods: [POST]
+
+get_all_sold_book_deals:
+    path: /api/admin/get_all_sold_book_deals
+    defaults:  {_controller: AppBundle:Api/AdminBookDealApi:getAllSoldBookDeals}
+    methods: [POST]
+
+#AdminQuoteManagementApiController
+
+get_student_quotes:
+    path: /api/admin/get_student_quotes
+    defaults:  {_controller: AppBundle:Api/AdminQuoteApi:getStudentQuotes}
+    methods: [POST]
+
+get_university_quotes:
+    path: /api/admin/get_university_quotes
+    defaults:  {_controller: AppBundle:Api/AdminQuoteApi:getUniversityQuotes}
+    methods: [POST]
+
+update_quote:
+    path: /api/admin/update_quote
+    defaults:  {_controller: AppBundle:Api/AdminQuoteApi:updateQuote}
+    methods: [POST]
+
+add_quote:
+    path: /api/admin/add_quote
+    defaults:  {_controller: AppBundle:Api/AdminQuoteApi:addQuote}
+    methods: [POST]
+
+delete_quote:
+    path: /api/admin/delete_quote
+    defaults:  {_controller: AppBundle:Api/AdminQuoteApi:deleteQuote}
+    methods: [POST]
+
+#QuoteApiController
+
+get_activated_student_quote:
+    path: /quote/get_activated_student_quote
+    defaults:  {_controller: AppBundle:Api/QuoteApi:getActivatedStudentQuotes}
+    methods: [GET]
+
+get_activated_university_quote:
+    path: /quote/get_activated_university_quote
+    defaults:  {_controller: AppBundle:Api/QuoteApi:getActivatedUniversityQuotes}
+    methods: [GET]
+
+#AdminNewsManagementApiController
+
+get_news:
+    path: /api/admin/get_news
+    defaults:  {_controller: AppBundle:Api/AdminNewsApi:getNews}
+    methods: [POST]
+
+add_news:
+    path: /api/admin/add_news
+    defaults:  {_controller: AppBundle:Api/AdminNewsApi:addNews}
+    methods: [POST]
+
+update_news:
+    path: /api/admin/update_news
+    defaults:  {_controller: AppBundle:Api/AdminNewsApi:updateNews}
+    methods: [POST]
+
+#NewsManagementApiController
+
+get_active_news:
+    path: /news/get_activated_news
+    defaults:  {_controller: AppBundle:Api/NewsApi:getActiveNews}
+    methods: [POST]
+
+get_single_news:
+    path: /news/get_single_news
+    defaults:  {_controller: AppBundle:Api/NewsApi:getSingleNews}
+    methods: [POST]
+
+
+#ContactUsController
+send_message:
+    path: /contactus/send_message
+    defaults:  {_controller: AppBundle:Api/ContactUsApi:sendMessage}
+    methods: [POST]
+
+send_mails_to_friends:
+    path: /contactus/send_mails_to_friends
+    defaults:  {_controller: AppBundle:Api/ContactUsApi:sendMailsToFriends}
+    methods: [POST]
+
+send_mails_to_user_friends:
+    path: /api/contactus/send_mails_to_user_friends
+    defaults:  {_controller: AppBundle:Api/ContactUsApi:sendMailsToUserFriends}
+    methods: [POST]
+
+
+#NewsletterApiController
+add_newsletter_email:
+    path: /newsletter/add_newsletter_email
+    defaults:  {_controller: AppBundle:Api/NewsletterApi:addNewsletterEmail}
+    methods: [POST]
+
+get_all_newsletter_emails:
+    path: /api/admin/get_all_newsletter_emails
+    defaults:  {_controller: AppBundle:Api/NewsletterApi:getAllNewsletterEmails}
+    methods: [POST]
+
+export_all_newsletter_data_into_csv:
+    path: /api/admin/export_all_newsletter_data_into_csv
+    defaults:  {_controller: AppBundle:Api/NewsletterApi:exportAllNewsletterEmails}
+    methods: [GET]
+
+
+#starList Management Api Controller
+
+add_book_deal_to_star_list:
+    path: /api/star/add_book_deal_to_star_list
+    defaults:  {_controller: AppBundle:Api/StarManagementApi:addBookDealToStarList}
+    methods: [POST]
+
+#admin log Api Controller
+
+get_log:
+    path: /api/admin/get_log
+    defaults:  {_controller: AppBundle:Api/AdminLogApi:getLog}
+    methods: [POST]
+
+#admin Databases Api Controller
+
+get_all_databases:
+    path: /api/admin/get_all_databases
+    defaults:  {_controller: AppBundle:Api/AdminDatabaseApi:getAllDatabases}
+    methods: [POST]
+
+download_database:
+    path: /api/admin/download_database
+    defaults:  {_controller: AppBundle:Api/AdminDatabaseApi:downloadDatabases}
+    methods: [POST]
+
+clear_public_database_directory:
+    path: /clear_public_database_directory
+    defaults:  {_controller: AppBundle:Api/AdminDatabaseApi:clearPublicDatabaseDirectory}
+    methods: [GET]
+
+
+#admin Dashboard Api Controller
+get_all_normal_and_social_user_data:
+    path: /api/admin/get_all_normal_and_social_user_data
+    defaults:  {_controller: AppBundle:Api/AdminReportApi:getAllNormalAndSocialUserData}
+    methods: [POST]
+
+get_login_and_registration_user_data:
+    path: /api/admin/get_login_and_registration_user_data
+    defaults:  {_controller: AppBundle:Api/AdminReportApi:getLoginAndRegistrationUserData}
+    methods: [POST]
+
+get_book_deal_and_contact_data:
+    path: /api/admin/get_book_deal_and_contact_data
+    defaults:  {_controller: AppBundle:Api/AdminReportApi:getBookDealAnDContactData}
+    methods: [POST]
+
+get_book_deal_method_data:
+    path: /api/admin/get_book_deal_method_data
+    defaults:  {_controller: AppBundle:Api/AdminReportApi:getBookDealMethodData}
+    methods: [POST]
+
+get_universities_user_data:
+    path: /api/admin/get_universities_user_data
+    defaults:  {_controller: AppBundle:Api/AdminReportApi:getUniversitiesUserData}
+    methods: [POST]
+
+get_google_access_token:
+    path: /api/admin/get_google_access_token
+    defaults:  {_controller: AppBundle:Api/AdminReportApi:getGoogleAccessToken}
+    methods: [GET]
+
+# DB refactoring API
+
+#add_campuses:
+#    path: /add_campuses_from_old_to_new
+#    defaults:  {_controller: AppBundle:DBManagement:addCampusesFromOldToNew}
+#    methods: [GET]
+#
+#add_books:
+#    path: /add_books_from_old_to_new
+#    defaults:  {_controller: AppBundle:DBManagement:addBooksFromOldToNew}
+#    methods: [GET]
+#
+#add_users:
+#    path: /add_users_from_old_to_new
+#    defaults:  {_controller: AppBundle:DBManagement:addUsersFromOldToNew}
+#    methods: [GET]
+#
+#add_book_deals:
+#    path: /add_book_deals_from_old_to_new
+#    defaults:  {_controller: AppBundle:DBManagement:addBookDealsFromOldToNew}
+#    methods: [GET]
+#
+#add_contacts:
+#    path: /add_contacts_from_old_to_new
+#    defaults:  {_controller: AppBundle:DBManagement:addContactsFromOldToNew}
+#    methods: [GET]
+#
+#add_messages:
+#    path: /add_messages_from_old_to_new
+#    defaults:  {_controller: AppBundle:DBManagement:addMessagesFromOldToNew}
+#    methods: [GET]
+
+#get_book_images:
+#    path: /get_book_images_from_amazon
+#    defaults:  {_controller: AppBundle:DBManagement:getBookImagesFromAmazon}
+#    methods: [GET]
+
+#update_book_database_for_images:
+#    path: /update_book_database_for_images
+#    defaults:  {_controller: AppBundle:DBManagement:updateBookTableForPictures}
+#    methods: [GET]
+#get_book_images_from_amazon:
+#    path: /get_book_images_from_amazon
+#    defaults:  {_controller: AppBundle:DBManagement:getImagesFromAmazon}
+#    methods: [GET]
+#get_failed_book_images_from_amazon:
+#    path: /get_failed_book_images_from_amazon
+#    defaults:  {_controller: AppBundle:DBManagement:getFailedImageLink}
+#    methods: [GET]
+#get_real_book_images_from_amazon:
+#    path: /get_real_book_images_from_amazon
+#    defaults:  {_controller: AppBundle:DBManagement:getRealImagesFromAmazon}
+#    methods: [GET]
+#get_db_backup:
+#    path: /get_db_backup
+#    defaults:  {_controller: AppBundle:DBManagement:getDatabaseBackup}
+#    methods: [GET]
+#get_amazon_prices:
+#    path: /get_amazon_prices
+#    defaults:  {_controller: AppBundle:DBManagement:getAmazonPrices}
+#    methods: [GET]
+#update_registration_date:
+#    path: /update_registration_date
+#    defaults:  {_controller: AppBundle:DBManagement:updateRegistrationDate}
+#    methods: [GET]

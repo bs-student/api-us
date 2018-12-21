@@ -1,0 +1,23 @@
+/web/bundles/
+/app/bootstrap.php.cache
+/app/cache/*
+/app/config/parameters.yml
+/app/config/parameters.yml.dist
+/app/logs/*
+!app/cache/.gitkeep
+!app/logs/.gitkeep
+/app/phpunit.xml
+/build/
+/vendor/
+/bin/
+/data/databaseBackup/*
+/composer.phar
+/web/bookImages/
+/web/assets/testEmail/
+/web/newsImages/
+/web/quoteImages/
+/web/newsletterEmails/
+/web/userImages/
+/NEVER DEL ! important
+/app/Resources/secret_files/*
+.idea

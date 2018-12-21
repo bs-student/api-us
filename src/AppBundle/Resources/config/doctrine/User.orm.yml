@@ -1,0 +1,140 @@
+AppBundle\Entity\User:
+    type: entity
+    table: users
+    repositoryClass: AppBundle\Repository\UserRepository
+
+
+    manyToOne:
+        referral:
+          targetEntity: Referral
+          joinColumn:
+            name: referral_id
+            referencedColumnName: id
+        campus:
+          targetEntity: Campus
+          inversedBy: users
+          joinColumn:
+            name: campus_id
+            referencedColumnName: id
+
+    oneToMany:
+        buyBooks:
+          targetEntity: BookDeal
+          mappedBy: buyer
+        sellBooks:
+          targetEntity: BookDeal
+          mappedBy: seller
+        wishLists:
+          targetEntity: WishList
+          mappedBy: user
+          cascade: [persist,remove]
+        contacts:
+          targetEntity: Contact
+          mappedBy: buyer
+          cascade: [persist,remove]
+        stars:
+          targetEntity: Star
+          mappedBy: user
+          cascade: [persist,remove]
+        logs:
+          targetEntity: Log
+          mappedBy: user
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        fullName:
+            column: full_name
+            nullable: true
+            type: string
+            length: '255'
+        googleId:
+            column: google_id
+            nullable: true
+            type: string
+            length: '255'
+        googleEmail:
+            column: google_email
+            nullable: true
+            type: string
+            length: '255'
+        googleToken:
+            column: google_token
+            nullable: true
+            type: string
+            length: '255'
+        facebookId:
+            column: facebook_id
+            nullable: true
+            type: string
+            length: '255'
+        facebookEmail:
+            column: facebook_email
+            nullable: true
+            type: string
+            length: '255'
+        facebookToken:
+            column: facebook_token
+            nullable: true
+            type: string
+            length: '255'
+        registrationStatus:
+            column: registration_status
+            nullable: true
+            type: string
+            length: '255'
+        emailVerified:
+            column: email_verified
+            type: string
+            length: '20'
+            options:
+                default: 'No'
+        adminVerified:
+            column: admin_verified
+            type: string
+            length: '20'
+            options:
+                default: 'No'
+        adminApproved:
+            column: admin_approved
+            type: string
+            length: '20'
+            options:
+                default: 'Yes'
+        standardHomePhone:
+            column: standard_home_phone
+            nullable: true
+            type: string
+            length: '30'
+        standardCellPhone:
+            column: standard_cell_phone
+            nullable: true
+            type: string
+            length: '30'
+        standardEmail:
+            column: standard_email
+            nullable: true
+            type: string
+            length: '90'
+        profilePicture:
+            column: profile_picture
+            type: string
+            length: '255'
+            options:
+                default: '/userImages/default_profile_picture.jpg'
+        emailNotification:
+            nullable: false
+            type: string
+            length: '5'
+            options:
+                default: 'On'
+        registrationDateTime:
+            type: datetime
+            options:
+                default: '2016-09-05 12:00:00'
+
+    lifecycleCallbacks: {  }

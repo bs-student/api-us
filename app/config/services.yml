@@ -1,0 +1,80 @@
+parameters:
+
+    sujit.user_manager.class : AppBundle\Manager\UserManager
+    sujit.my_mailer.class : AppBundle\Mailer\Mailer
+
+
+
+services:
+
+
+    sujit.my_mailer :
+        class: "%sujit.my_mailer.class%"
+        arguments: ["@mailer", "@router","@templating",{"confirmation.template":"%fos_user.registration.confirmation.template%","resetting.template":"%fos_user.resetting.email.template%","host_info":"%host_info%"}]
+
+    sujit.user_manager :
+        class: "%sujit.user_manager.class%"
+        arguments: ["@security.encoder_factory", "@fos_user.util.username_canonicalizer","@fos_user.util.email_canonicalizer","@fos_user.entity_manager", "%fos_user.model.user.class%"]
+
+    sujit.security.authentication_success_handler :
+        class: AppBundle\Form\Handler\AuthenticationSuccessHandler
+        arguments:  ["@fos_user.entity_manager","@form.factory","@jms_serializer"]
+        tags:
+            - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
+
+    sujit.security.authentication_failure_handler :
+        class: AppBundle\Form\Handler\AuthenticationFailureHandler
+        arguments:  ["@fos_user.entity_manager","@form.factory","@jms_serializer"]
+
+    app.form.registration:
+            class: AppBundle\Form\Type\RegistrationType
+            tags:
+                - { name: form.type, alias: app_user_registration }
+    app.form.handler.registration:
+            class: AppBundle\Form\Handler\RegistrationFormHandler
+            arguments: ["@fos_user.registration.form", "@request", "@fos_user.user_manager", "@fos_user.mailer", "@fos_user.util.token_generator"]
+            scope: request
+            public: false
+    app.form.resetting:
+            class: AppBundle\Form\Type\ResettingType
+            tags:
+                - { name: form.type, alias: app_password_resetting }
+
+    app.form.handler.resetting:
+                class: AppBundle\Form\Handler\ResettingFormHandler
+                arguments: ["@fos_user.resetting.form", "@request", "@fos_user.user_manager"]
+                scope: request
+                public: false
+
+    app.form.change_password:
+                class: AppBundle\Form\Type\ChangePasswordType
+                tags:
+                    - { name: form.type, alias: app_password_changing }
+
+    app.form.handler.change_password:
+                class: AppBundle\Form\Handler\ChangePasswordFormHandler
+                arguments: ["@fos_user.change_password.form", "@request", "@fos_user.user_manager"]
+                scope: request
+                public: false
+
+    app.validator.username_exist:
+            class: AppBundle\Validator\UsernameValidator
+            arguments: ["@doctrine.orm.entity_manager"]
+
+            tags:
+                - { name: validator.constraint_validator, alias: app.validator.username_exist }
+
+    app.user.repository:
+            class: Doctrine\ORM\EntityRepository
+            factory: [@doctrine.orm.entity_manager, getRepository]
+            arguments:
+                - AppBundle\Entity\User
+
+    app.oauth.social_plugin_grant_extension:
+            class: AppBundle\OAuth\SocialPluginGrantExtension
+            arguments: ["@app.user.repository"]
+            tags:
+                - { name: fos_oauth_server.grant_extension, uri: 'http://platform.local/grants/social_plugin' }
+
+    app.circle_image:
+            class: AppBundle\Service\CircleImage

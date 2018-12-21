@@ -1,0 +1,17 @@
+AppBundle\Entity\Referral:
+    type: entity
+    table: referrals
+    repositoryClass: AppBundle\Repository\ReferralRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        referralName:
+            column: referral_name
+            nullable: false
+            type: string
+            length: '255'
+    lifecycleCallbacks: {  }

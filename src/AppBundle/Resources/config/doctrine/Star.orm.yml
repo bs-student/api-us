@@ -1,0 +1,24 @@
+AppBundle\Entity\Star:
+    type: entity
+    table: star
+    repositoryClass: AppBundle\Repository\StarRepository
+
+    manyToOne:
+        user:
+            targetEntity: User
+            inversedBy: stars
+            joinColumn:
+              name: user_id
+              referencedColumnName: id
+        bookDeal:
+            targetEntity: BookDeal
+            joinColumn:
+              name: book_deal_id
+              referencedColumnName: id
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    lifecycleCallbacks: {  }

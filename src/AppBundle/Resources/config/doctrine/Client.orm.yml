@@ -1,0 +1,15 @@
+AppBundle\Entity\Client:
+    type: entity
+    table: client
+
+
+
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+
+    lifecycleCallbacks: {  }

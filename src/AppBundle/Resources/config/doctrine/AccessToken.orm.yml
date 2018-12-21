@@ -1,0 +1,27 @@
+AppBundle\Entity\AccessToken:
+    type: entity
+    table: access_token
+
+
+
+
+
+    manyToOne:
+        client:
+          targetEntity: Client
+
+          joinColumn:
+            nullable: false
+
+        user:
+          targetEntity: User
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+
+
+    lifecycleCallbacks: {  }

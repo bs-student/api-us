@@ -1,0 +1,124 @@
+{% block body -%}
+
+    <!doctype html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>textbook exchange made easy: student2student.com newsletter</title>
+        <style type="text/css">
+            body, td, th {
+                font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+                font-size: 14px
+            }
+            a:link {
+                color: #000000;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+
+    <body bgcolor="#ebeefa">
+
+
+    <table style="background:#FFFFFF" bgcolor="#ebeefa" cellpadding="0" cellspacing="0" border="0" align="center" width="600">
+        <tr>
+            <td>
+
+                <table cellpadding="0" cellspacing="0" border="0" align="center">
+                    <tr>
+                        <td align="center"><a href="http://www.student2student.com/" target="_blank">
+                                <img  src="{{ header_image }}" alt="Student2student logo" style="width:600px;height:465px;display: block;    z-index: 10;    position: relative;" title="Student2student logo"></a>
+                        </td>
+                    </tr>
+                </table>
+
+                <table cellpadding="0" cellspacing="0" border="0" align="center" bgcolor="#FFFFFF">
+                    <tr>
+                        <td align="left" style="padding:20px; font-size:18px">
+                            Hello {{ user }},<br /><br />
+                            You can reset your password by clicking following "Reset my Password Button".
+                        </td>
+                    </tr>
+                </table>
+
+                <table width="600" cellpadding="0" cellspacing="0" border="0" align="center" bgcolor="#FFFFFF">
+                    <tr>
+                        <td colspan="3" align="right" valign="middle"><a href="{{ confirmationUrl }}">
+                            <img src="{{ button_reset_password_image }}" alt="activate my password" width="268" height="59" title="Reset my Password"></a>
+                        </td>
+                        <td width="26">
+
+                        </td>
+                        <td align="left" valign="middle">
+                           <a href="http://student2student.com/tellFriends"> <img src="{{ button_tell_friends_image }}" alt="tell your friends" width="268" height="59" title="Tell your friends"></a>
+                        </td>
+                    </tr>
+                </table>
+
+                <table width="600" cellpadding="0" cellspacing="0" border="0" align="center" bgcolor="#FFFFFF">
+                    <tr>
+                        <td align="left" style="padding:20px; font-size:18px" colspan="5" align="left" valign="middle">
+                            Or just click the following link to reset your password.<br/><br/>
+                            <a style="padding:20px; font-size:12px; color: blue; text-decoration: underline" href="{{ confirmationUrl }}">{{ confirmationUrl }}</a>
+
+                        </td>
+
+                    </tr>
+                </table>
+
+
+                <table width="600" cellpadding="0" cellspacing="0" border="0" align="center" bgcolor="#FFFFFF">
+                    <tr>
+                        <td align="left" style="padding:20px; font-size:18px">
+                            Don't forget about our online price comparison feature.<br />
+                            Yes, we tell you the cheapest price online!<br /><br />
+                            The reset password link will expire in the next 24 hours<br/><br/>
+
+<span style="color:#000000">Cheers,<br />
+Your Student 2 Student Team</span>
+                        </td>
+                    </tr>
+                </table>
+
+                <table cellpadding="0" cellspacing="0" border="0" align="center">
+                    <tr>
+                        <td align="center">
+                            <img src="{{ share_image }}" alt="Student2student main hero image" width="600" height="136" style="display:block" title="Student2student main hero image">
+                        </td>
+                    </tr>
+                </table>
+
+                <table align="center" bgcolor="#FFFFFF" width="600" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td height="15"></td>
+                    </tr>
+                </table>
+
+                <table cellpadding="0" cellspacing="0" border="0" align="center">
+                    <tr>
+                        <td align="center">
+                            <img  src="{{ footer_image }}" alt="Student2student main hero image" width="600" height="3" style="display:block" title="Student2student main hero image">
+                        </td>
+                    </tr>
+                </table>
+
+                <table width="600" cellpadding="0" cellspacing="0" border="0" align="center" bgcolor="#FFFFFF">
+                    <tr>
+                        <td align="center" style="padding:20px; font-size:14px">2007 - 2018 Student 2 Student, All Rights Reserved</td>
+                    </tr>
+                </table>
+
+
+
+            </td>
+        </tr>
+    </table>
+
+
+    </body>
+    </html>
+
+
+
+
+{% endblock %}

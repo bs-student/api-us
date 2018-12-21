@@ -1,0 +1,104 @@
+AppBundle\Entity\BookDeal:
+    type: entity
+    table: book_deals
+    repositoryClass: AppBundle\Repository\BookDealRepository
+
+    oneToMany:
+        contacts:
+            targetEntity: Contact
+            mappedBy: bookDeal
+            cascade: [persist,remove]
+        bookDealImages:
+            targetEntity: BookDealImage
+            mappedBy: bookDeal
+            cascade: [persist,remove]
+    manyToOne:
+        book:
+            targetEntity: Book
+            inversedBy: bookDeals
+            joinColumn:
+              name: book_id
+              referencedColumnName: id
+        seller:
+            targetEntity: User
+            inversedBy: sellBooks
+            joinColumn:
+              name: seller_id
+              referencedColumnName: id
+        buyer:
+            targetEntity: User
+            inversedBy: buyBooks
+            joinColumn:
+              name: buyer_id
+              referencedColumnName: id
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+
+    fields:
+        bookPriceSell:
+            nullable: false
+            type: decimal
+            precision: 7
+            scale: 2
+        bookCondition:
+            nullable: false
+            type: string
+            length: '20'
+        bookIsHighlighted:
+            nullable: false
+            type: string
+            length: '5'
+        bookHasNotes:
+            nullable: false
+            type: string
+            length: '5'
+        bookComment:
+            nullable: true
+            type: text
+        bookContactMethod:
+            nullable: false
+            type: string
+            length: '25'
+        bookContactHomeNumber:
+            nullable: true
+            type: string
+            length: '20'
+        bookContactCellNumber:
+            nullable: true
+            type: string
+            length: '20'
+        bookContactEmail:
+            nullable: true
+            type: string
+            length: '50'
+        bookIsAvailablePublic:
+            nullable: false
+            type: string
+            length: '5'
+        bookPaymentMethodCashOnExchange:
+            nullable: true
+            type: boolean
+        bookPaymentMethodCheque:
+            nullable: true
+            type: boolean
+        bookAvailableDate:
+            type: date
+        bookSellingStatus:
+            nullable: false
+            type: string
+            length: '20'
+        bookViewCount:
+            nullable: true
+            type: integer
+        bookStatus:
+            nullable: false
+            type: string
+            length: '20'
+        bookSubmittedDateTime:
+            type: datetime
+    lifecycleCallbacks: {  }

@@ -1,0 +1,9 @@
+
+#_app_crud_routing:
+#    resource: "@AppBundle/Resources/config/routing.yml"
+
+_app_routing:
+    resource: "@AppBundle/Resources/config/app_routing.yml"
+
+_app_bundle_routing:
+    resource: "@AppBundle/Resources/config/app_bundle_routing.yml"

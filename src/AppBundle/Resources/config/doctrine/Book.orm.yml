@@ -1,0 +1,70 @@
+AppBundle\Entity\Book:
+    type: entity
+    table: books
+    repositoryClass: AppBundle\Repository\BookRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+
+    oneToMany:
+        bookDeals:
+            targetEntity: BookDeal
+            mappedBy: book
+            cascade: [persist,remove]
+
+    fields:
+        bookTitle:
+            nullable: false
+            type: string
+            length: '255'
+        bookDirectorAuthorArtist:
+            nullable: true
+            type: string
+            length: '255'
+        bookEdition:
+            nullable: true
+            type: string
+            length: '100'
+        bookIsbn10:
+            nullable: false
+            type: string
+            length: '30'
+        bookIsbn13:
+            nullable: true
+            type: string
+            length: '30'
+        bookPublisher:
+            nullable: true
+            type: string
+            length: '200'
+        bookPublishDate:
+            nullable: true
+            type: date
+        bookBinding:
+            nullable: true
+            type: string
+            length: '100'
+        bookPage:
+            nullable: true
+            type: string
+            length: '10'
+        bookLanguage:
+            nullable: true
+            type: string
+            length: '20'
+        bookDescription:
+            nullable: true
+            type: text
+        bookImage:
+            nullable: true
+            type: string
+            length: '200'
+        bookAmazonPrice:
+            nullable: true
+            type: decimal
+            precision: 7
+            scale: 2
+    lifecycleCallbacks: {  }

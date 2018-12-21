@@ -1,0 +1,29 @@
+AppBundle\Entity\BookDealImage:
+    type: entity
+    table: 	book_deal_images
+    repositoryClass: AppBundle\Repository\BookDealImageRepository
+
+
+    manyToOne:
+        bookDeal:
+            targetEntity: BookDeal
+            inversedBy: bookDealImages
+            joinColumn:
+                name: book_deal_id
+                referencedColumnName: id
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        imageUrl:
+            column: image_url
+            nullable: true
+            type: string
+            length: '255'
+
+
+    lifecycleCallbacks: {  }

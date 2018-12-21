@@ -1,0 +1,36 @@
+AppBundle\Entity\State:
+    type: entity
+    table: states
+    repositoryClass: AppBundle\Repository\StateRepository
+
+    oneToMany:
+        campuses:
+          targetEntity: Campus
+          mappedBy: state
+
+    manyToOne:
+        country:
+          targetEntity: Country
+          inversedBy: states
+          joinColumn:
+            name: country_id
+            referencedColumnName: id
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        stateName:
+            column: state_name
+            nullable: true
+            type: string
+            length: '255'
+        stateShortName:
+            column: state_short_name
+            nullable: true
+            type: string
+            length: '255'
+
+    lifecycleCallbacks: {  }

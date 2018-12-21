@@ -1,0 +1,34 @@
+AppBundle\Entity\Log:
+    type: entity
+    table: logs
+    repositoryClass: AppBundle\Repository\LogRepository
+
+    manyToOne:
+        user:
+          targetEntity: User
+          joinColumn:
+            name: user_id
+            referencedColumnName: id
+
+
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        logType:
+            type: string
+            length: '100'
+        logUserType:
+            type: string
+            length: '20'
+        logDateTime:
+            type: datetime
+        logDescription:
+            type: text
+        userIpAddress:
+            type: string
+            length: '50'
+    lifecycleCallbacks: {  }

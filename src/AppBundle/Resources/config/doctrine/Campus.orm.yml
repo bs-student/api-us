@@ -1,0 +1,47 @@
+AppBundle\Entity\Campus:
+    type: entity
+    table: campuses
+    repositoryClass: AppBundle\Repository\CampusRepository
+
+    oneToMany:
+        users:
+          targetEntity: User
+          mappedBy: campus
+
+
+
+    manyToOne:
+        university:
+          targetEntity: University
+          inversedBy: campuses
+          joinColumn:
+            name: university_id
+            referencedColumnName: id
+
+        state:
+          targetEntity: State
+          inversedBy: campuses
+          joinColumn:
+            name: state_id
+            referencedColumnName: id
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        campusName:
+            column: campus_name
+            nullable: true
+            type: string
+            length: '255'
+        campusStatus:
+            column: campus_status
+            nullable: false
+            type: string
+            length: '20'
+            options:
+                default: 'Activated'
+
+    lifecycleCallbacks: {  }

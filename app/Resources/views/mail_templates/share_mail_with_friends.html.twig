@@ -1,0 +1,115 @@
+{% block body -%}
+
+    <!doctype html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>textbook exchange made easy: student2student.com newsletter</title>
+        <style type="text/css">
+            body, td, th {
+                font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+                font-size: 14px
+            }
+            a:link {
+                color: #000000;
+                text-decoration: none;
+            }
+        </style>
+    </head>
+
+    <body bgcolor="#ebeefa">
+
+
+    <table style="background:#FFFFFF" bgcolor="#ebeefa" cellpadding="0" cellspacing="0" border="0" align="center" width="600">
+        <tr>
+            <td>
+
+                <table cellpadding="0" cellspacing="0" border="0" align="center">
+                    <tr>
+                        <td align="center"><a href="http://www.student2student.com/" target="_blank">
+                                <img  src="{{ header_image }}" alt="Student2student logo" style="width:600px;height:465px;display: block;    z-index: 10;    position: relative;" title="Student2student logo"></a>
+                        </td>
+                    </tr>
+                </table>
+
+                <table cellpadding="0" cellspacing="0" border="0" align="center" bgcolor="#FFFFFF">
+                    <tr>
+                        <td width="65%" align="left" style="width:60%;padding:10px; font-size:14px;color:#147DB4">
+                            <h4 style="color:#147DB4;font-size: 18px;">Hello my Friend,</h4>
+                            <p >Check out this service... just for students!</p>
+                            <p >No! This is not another bookstore trying to get your used textbooks for almost nothing!</p>
+                            <p >I am sick of getting ripped-off by the bookstores, so I decided to sell my textbooks directly to all the students on-campus.</p>
+                            <ul>
+                                <li>List books you want to sell, find books you need.</li>
+                                <li>Promote your own textbook Selling Page.</li>
+                                <li>Meet on-campus to do the deal.</li>
+                                <li>Interact directly with students. Pay cash.</li>
+                                <li>No shipping. No credit cards.</li>
+                                <li>Use the online textbook price comparison.</li>
+                                <li>IT'S TOTALLY FREE!</li>
+                                <li>Check out the 2 minute "How it Works":<br/>
+                                    <a style="color:#147DB4; text-decoration: underline" href="http://localhost:8080/Student2StudentApp/app/#/conceptVideo">Watch Now!</a></li>
+                            </ul>
+                            <p >Don't waste money, buy directly from students.</p>
+                            <p >... tell your friends, tell your classmates, tell the world... the more members we get, the more everyone will SAVE!</p>
+                            <p >It's time to take back the bookstore! Cutout the middleman and spend your money on something better!!! Or do you like to get ripped-off?</p>
+
+                            <text >
+                                Cheers,<br/>
+                                {{fullName}}<br/>
+                                <a style="color:#147DB4;text-decoration: none">{{email}}</a>
+                            </text>
+
+
+                        </td>
+                        <td width="35%" valign="top" align="center" style="width:40%;padding:10px; font-size:14px;color:#147DB4">
+                            <br/><br/>
+                            <a href="http://student2student.com/signup"><img src="{{ join_button }}"/></a><br/><br/>
+                            <p style="font-style: italic;" >Personal Message for you:</p><br/>
+                            <text>{{message}}</text>
+                        </td>
+                    </tr>
+                </table>
+
+                <table cellpadding="0" cellspacing="0" border="0" align="center">
+                    <tr>
+                        <td align="center">
+                            <img src="{{ share_image }}" alt="Student2student main hero image" width="600" height="136" style="display:block" title="Student2student main hero image">
+                        </td>
+                    </tr>
+                </table>
+
+                <table align="center" bgcolor="#FFFFFF" width="600" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td height="15"></td>
+                    </tr>
+                </table>
+
+                <table cellpadding="0" cellspacing="0" border="0" align="center">
+                    <tr>
+                        <td align="center">
+                            <img  src="{{ footer_image }}" alt="Student2student main hero image" width="600" height="3" style="display:block" title="Student2student main hero image">
+                        </td>
+                    </tr>
+                </table>
+
+                <table width="600" cellpadding="0" cellspacing="0" border="0" align="center" bgcolor="#FFFFFF">
+                    <tr>
+                        <td align="center" style="padding:20px; font-size:14px">2007 - 2018 Student 2 Student, All Rights Reserved</td>
+                    </tr>
+                </table>
+
+
+
+            </td>
+        </tr>
+    </table>
+
+
+    </body>
+    </html>
+
+
+
+
+{% endblock %}
