@@ -1,0 +1,48 @@
+{
+    "name": "dizda/cloud-backup-bundle",
+    "type": "symfony-bundle",
+    "description": "Be able to backup your database(s) and upload it to the cloud (Dropbox, CloudApp, GoogleDrive, etc.)",
+    "keywords": ["symfony", "dropbox", "database", "mongodb", "mysql", "dump", "cloudapp", "GoogleDrive", "GDrive"],
+    "homepage": "https://github.com/dizda/CloudBackupBundle",
+    "license": "MIT",
+
+    "authors": [
+        {
+            "name": "Jonathan Dizdarevic",
+            "email": "dizzda@gmail.com",
+            "homepage": "https://twitter.com/dizzda"
+        },
+        {
+            "name": "Contributors",
+            "homepage": "https://github.com/dizda/CloudBackupBundle/graphs/contributors"
+        }
+    ],
+
+    "require": {
+        "php": "^5.4 || ^7.0",
+        "symfony/framework-bundle": "^2.1 || ^3.0",
+        "symfony/monolog-bundle": "^2.3"
+    },
+
+    "require-dev": {
+        "google/apiclient": "1.1.7",
+        "symfony/symfony": "^2.3.25"
+    },
+
+    "suggest": {
+        "matthiasplappert/cloudapp-api": "To support upload to CloudApp",
+        "happyr/google-site-authenticator-bundle": "To enable upload dumps on google drive.",
+        "dropbox/dropbox-sdk": "To enable upload to Dropbox",
+        "knplabs/knp-gaufrette-bundle": "To use Gaufrette as a cloud storage",
+        "oneup/flysystem-bundle": "To use Flysystem as a cloud storage",
+        "jongotlin/deadmanssnitch-bundle": "To report your successful backups to deadmanssnitch.com"
+    },
+
+    "autoload": {
+        "psr-0": {
+            "Dizda\\CloudBackupBundle": ""
+        }
+    },
+
+    "target-dir": "Dizda/CloudBackupBundle"
+}
