@@ -662,7 +662,11 @@ class BookDealManagementApiController extends Controller
 
 
         //If Error Occurs than Return Error Message
-        if($fileUploadError)return $this->_createJsonResponse('error', array('errorTitle' => "Cannot Update Book Deal", 'errorDescription' => "Some Files are more than 300 KB"), 400);
+        if($fileUploadError)return $this->_createJsonResponse('error', array(
+            'errorTitle' => "Cannot Update Book Deal",
+            'errorDescription' => "Some Files are more than 300 KB",
+            'errorTitleKey' => "COULD_NOT_UPDATE_BOOK_DEAL",
+            'errorDescriptionKey' => "SOME_FILES_ARE_MORE_THAN_300_KB"), 400);
 
 
 
@@ -718,20 +722,34 @@ class BookDealManagementApiController extends Controller
                     );
                     $this->_saveLog($logData);
 
-                    return $this->_createJsonResponse('success', array("successTitle" => "Book Deal Updated", "successDescription" => "This book deal has been updated into your selling book list"), 200);
+                    return $this->_createJsonResponse('success', array(
+                        "successTitle" => "Book Deal Updated",
+                        "successDescription" => "This book deal has been updated into your selling book list",
+                        "successTitleKey" => "BOOK_DEAL_UPDATED",
+                        "successDescriptionKey" => "THIS_BOOK_DEAL_HAS_BEEN_UPDATED_INTO_YOUR_SELLING_BOOK"
+                        ), 200);
                 }catch (\Exception $e){
                     $em->getConnection()->rollBack();
-                    return $this->_createJsonResponse('error', array("errorTitle"=>"Could not update Book Deal","errorData" => $bookDealForm), 400);
+                    return $this->_createJsonResponse('error', array(
+                        "errorTitle"=>"Could not update Book Deal",
+                        "errorTitleKey" => "COULD_NOT_UPDATE_BOOK_DEAL",
+                        "errorData" => $bookDealForm), 400);
                 }
             } else {
                 return $this->_createJsonResponse('error', array(
                     "errorTitle"=>"Could not update Book Deal",
                     "errorDescription"=>"Please check the form and try again",
+                    "errorTitleKey" => "COULD_NOT_UPDATE_BOOK_DEAL",
+                    "errorDescriptionKey" => "PLEASE_CHECK_THE_FORM_TRY_AGAIN",
                     "errorData" => $bookDealForm), 400);
 
             }
         }else{
-            return $this->_createJsonResponse('error', array('errorTitle' => "Cannot Update Book Deal", 'errorDescription' => "You are not owner of that book deal or the book is already sold"), 400);
+            return $this->_createJsonResponse('error', array(
+                'errorTitle' => "Cannot Update Book Deal",
+                'errorDescription' => "You are not owner of that book deal or the book is already sold",
+                "errorTitleKey" => "COULD_NOT_UPDATE_BOOK_DEAL",
+                "errorDescriptionKey" => "YOU_ARE_NOT_OWNER_OF_THAT_BOOK_DEAL_OR"), 400);
         }
 
 
@@ -753,7 +771,9 @@ class BookDealManagementApiController extends Controller
             if($bookDeal->getBuyer()!==null){
                 return $this->_createJsonResponse('error', array(
                     'errorTitle' => "Cannot Delete Book Deal",
-                    'errorDescription' => "This book is sold."
+                    'errorDescription' => "This book is sold.",
+                    'errorTitleKey' => "CAN_NOT_DELETE_BOOK_DEAL",
+                    'errorDescriptionKey' => "THIS_BOOK_IS_SOLD"
                 ), 400);
             }else {
                 $em->remove($bookDeal);
@@ -769,10 +789,16 @@ class BookDealManagementApiController extends Controller
                 );
                 $this->_saveLog($logData);
 
-                return $this->_createJsonResponse('success', array('successTitle' => "Book Deal is Deleted"), 200);
+                return $this->_createJsonResponse('success', array(
+                    'successTitle' => "Book Deal is Deleted",
+                    'successTitleKey' => "BOOK_DEAL_IS_DELETED"), 200);
             }
         }else{
-            return $this->_createJsonResponse('error', array('errorTitle' => "Cannot Delete Book Deal", 'errorDescription' => "You are not owner of that book deal."), 400);
+            return $this->_createJsonResponse('error', array(
+                'errorTitle' => "Cannot Delete Book Deal",
+                'errorDescription' => "You are not owner of that book deal.",
+                'errorTitleKey' => "CAN_NOT_DELETE_BOOK_DEAL",
+                'errorDescriptionKey' => "YOU_ARE_NOT_OWNER_OF_THAT_BOOK_DEAL"), 400);
         }
     }
 

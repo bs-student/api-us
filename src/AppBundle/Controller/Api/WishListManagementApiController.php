@@ -46,9 +46,16 @@ class WishListManagementApiController extends Controller
             $em->remove($alreadyInserted);
             try {
                 $em->flush();
-                return $this->_createJsonResponse('success',array('successTitle'=>"Wish List Item has been removed"),200);
+                return $this->_createJsonResponse('success',array(
+                    'successTitle'=>"Wish List Item has been removed",
+                    'successTitleKey'=>"WISH_LIST_ITEM_HAS_BEEN_REMOVED"
+
+                    ),200);
             }catch (Exception $e){
-                return $this->_createJsonResponse('error',array('errorTitle'=>"Wish List Item could not be removed"),400);
+                return $this->_createJsonResponse('error',array(
+                    'errorTitle'=>"Wish List Item could not be removed",
+                    'errorTitleKey'=>"WISH_LIST_ITEM_COULD_NOT_BE_REMOVED"
+                    ),400);
             }
         }else{
             $wishList = new WishList();
@@ -61,9 +68,14 @@ class WishListManagementApiController extends Controller
             if ($wishListForm->isValid()) {
                 $em->persist($wishList);
                 $em->flush();
-                return $this->_createJsonResponse('success', array("successTitle" => "Book Successfully Added to WishList"), 200);
+                return $this->_createJsonResponse('success', array(
+                    "successTitle" => "Book Successfully Added to WishList",
+                    "successTitleKey" => "BOOK_SUCCESSFULLY_ADDED_TO_WISHLIST"), 200);
             } else {
-                return $this->_createJsonResponse('error', array("errorTitle" => "Couldn't Added to Wishlist","errorData" => $wishListForm), 400);
+                return $this->_createJsonResponse('error', array(
+                    "errorTitle" => "Couldn't Added to Wishlist",
+                    "errorTitleKey" => "COULD_NOT_ADDED_TO_WISHLIST",
+                    "errorData" => $wishListForm), 400);
             }
         }
 
@@ -149,16 +161,24 @@ class WishListManagementApiController extends Controller
         $data = $wishListRepo->findBy(array('book'=>$data['bookId'],'user'=>$user->getId()));
 
         if($data==null){
-            return $this->_createJsonResponse('error',array('errorTitle'=>"Sorry, Can't Delete","errorDescription"=>"This book isn't in your wishlist"),400);
+            return $this->_createJsonResponse('error',array(
+                'errorTitle'=>"Sorry, Can't Delete",
+                "errorDescription"=>"This book isn't in your wishlist",
+                'errorTitleKey'=>"SORRY_CAN_NOT_DELETE",
+                "errorDescriptionKey"=>"THIS_BOOK_IS_NT_IN_YOUR_WISHLIST"),400);
         }
 
         $em->remove($data[0]);
 
         try {
             $em->flush();
-            return $this->_createJsonResponse('success',array('successTitle'=>"Wish List Item has been removed"),200);
+            return $this->_createJsonResponse('success',array(
+                'successTitle'=>"Wish List Item has been removed",
+                'successTitleKey'=>"WISH_LIST_ITEM_HAS_BEEN_REMOVED"),200);
         }catch (Exception $e){
-            return $this->_createJsonResponse('error',array('errorTitle'=>"Wish List Item could not be removed"),400);
+            return $this->_createJsonResponse('error',array(
+                'errorTitle'=>"Wish List Item could not be removed",
+                'errorTitleKey'=>"WISH_LIST_ITEM_COULD_NOT_BE_REMOVED"),400);
         }
 
 

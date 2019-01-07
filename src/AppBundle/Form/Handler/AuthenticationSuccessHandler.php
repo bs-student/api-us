@@ -66,6 +66,8 @@ class AuthenticationSuccessHandler implements AuthenticationSuccessHandlerInterf
             return $this->_createJsonResponse('success',array(
                 'successTitle' => "Login Successful",
                 'successDescription'=>"Please Complete your registration process.",
+                'successTitleKey' =>"LOGIN_SUCCESSFUL",
+                'successDescriptionKey' => "PLEASE_COMPLETE_YOUR_REGISTRATION_PROCESS",
                 'successData'=>$user_data
             ),200);
 
@@ -74,7 +76,9 @@ class AuthenticationSuccessHandler implements AuthenticationSuccessHandlerInterf
             if($user->getAdminApproved()==="No"){
                 return $this->_createJsonResponse('error',array(
                     'errorTitle' => "Account Blocked by Admin",
-                    'errorDescription' => "Your account is blocked by admin. Please contact support or try creating a new account."
+                    'errorDescription' => "Your account is blocked by admin. Please contact support or try creating a new account.",
+                    'errorTitleKey'=>"ACCOUNT_BLOCKED_BY_ADMIN",
+                    'errorDescriptionKey'=>"YOUR_ACCOUNT_IS_BLOCKED_BY_ADMIN",
                 ),400);
             }elseif ($user->getAdminApproved()==="Yes") {
                 $logData = array(
@@ -88,6 +92,8 @@ class AuthenticationSuccessHandler implements AuthenticationSuccessHandlerInterf
                 $this->_saveLog($logData);
 
                 return $this->_createJsonResponse('success', array(
+                    'successTitleKey' => "HEY_WELCOME",
+                    'successDescriptionKey' => "YOU_ARE_LOGGED_IN",
                     'successTitle' => "Hey, welcome " . $user->getUsername(),
                     'successDescription' => "You are logged in",
                     'successData' => array(
@@ -99,6 +105,8 @@ class AuthenticationSuccessHandler implements AuthenticationSuccessHandlerInterf
 
         }else{
             return $this->_createJsonResponse('error',array(
+                'errorTitleKey' => "LOGIN_UNSUCCESSFUL",
+                'errorDescriptionKey' => "PLEASE_TRY_TO_LOGIN_AGAIN",
                 'errorTitle' => "Login Unsuccessful",
                 'errorDescription' => "Please try to Login again."
             ),400);

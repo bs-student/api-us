@@ -206,7 +206,7 @@ class AdminUserApiController extends Controller
                 } else {
 
                     $userForm = $this->createForm(new UserType(), $editedUser);
-
+                    $editedUser->setEnabled(true);
                     $userForm->remove('fullName');
                     $userForm->remove('email');
                     $userForm->remove('referral');

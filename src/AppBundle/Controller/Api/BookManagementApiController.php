@@ -356,7 +356,12 @@ class BookManagementApiController extends Controller
             }
         }
         //If Error Occurs than Return Error Message
-        if($fileUploadError)return $this->_createJsonResponse('error', array('errorTitle' => "Cannot Add Sell Book", 'errorDescription' => "Some Files are more than 300 KB"), 400);
+        if($fileUploadError)return $this->_createJsonResponse('error', array(
+            'errorTitle' => "Cannot Add Sell Book",
+            'errorDescription' => "Some Files are more than 300 KB",
+            "errorTitleKey" => "COULD_NOT_ADD_BOOK_ON_SELL_PAGE",
+            "errorDescriptionKey" => "SOME_FILES_ARE_MORE_THAN_300_KB"
+            ), 400);
 
 
 
@@ -477,7 +482,9 @@ class BookManagementApiController extends Controller
                 );
                 $this->_saveLog($logData);
 
-                return $this->_createJsonResponse('success', array("successTitle" => "Book has been successfully posted"), 200);
+                return $this->_createJsonResponse('success', array(
+                    "successTitle" => "Book has been successfully posted",
+                    "successTitleKey" => "BOOK_HAS_BEEN_SUCCESSFULLY_POSTED"), 200);
             } else {
                 return $this->_createJsonResponse('error', array("errorData" => $bookDealForm), 400);
 
@@ -485,7 +492,12 @@ class BookManagementApiController extends Controller
 
 
         }else{
-            return $this->_createJsonResponse('error', array("errorTitle" => "Could not add book on sell page","errorDescription" => "Check the form and submit again"), 400);
+            return $this->_createJsonResponse('error', array(
+                "errorTitle" => "Could not add book on sell page",
+                "errorDescription" => "Check the form and submit again",
+                "errorTitleKey" => "COULD_NOT_ADD_BOOK_ON_SELL_PAGE",
+                "errorDescriptionKey" => "CHECK_THE_FORM_AND_SUBMIT_AGAIN"
+                ), 400);
         }
 
     }

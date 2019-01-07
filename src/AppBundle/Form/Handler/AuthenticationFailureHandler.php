@@ -34,16 +34,23 @@ class AuthenticationFailureHandler implements AuthenticationFailureHandlerInterf
     public function onAuthenticationFailure(Request $request,  AuthenticationException $exception){
 
         $error = $exception->getMessage();
+        $errorDescKey = "";
 
         if(!strcmp($error,"User account is disabled.")){
+            $errorDescKey ="PLEASE_CHECK_EMAIL_ACTIVATION";
             $error.=" Please Check Your Email for the Activation Link. Please also check spam or junk if you can't find the email.";
         }
 
         if(!strcmp($error,"Bad credentials.")){
             $error="The Username or Password you entered is incorrect";
+            $errorDescKey = "USER_NAME_OR_EMAIL_ENTERED_INCORRECT";
         }
 
-        return $this->_createJsonResponse('error',array("errorTitle" => "Login Unsuccessful", "errorDescription" => $error),400);
+        return $this->_createJsonResponse('error',array(
+            "errorTitle" => "Login Unsuccessful",
+            "errorDescription" => $error,
+            "errorTitleKey" => "LOGIN_UNSUCCESSFUL",
+            "errorDescriptionKey"=>$errorDescKey),400);
     }
 
 

@@ -320,6 +320,7 @@ class ContactManagementApiController extends Controller
 
                 return $this->_createJsonResponse('success',array(
                     'successTitle'=>"Successfully Sent Message",
+                    'successTitleKey'=>"SUCCESSFULLY_SENT_MESSAGE",
                     'successData'=>array(
                         'sender'=>$message->getUser()->getUsername(),
                         'messageBody'=>$message->getMessageBody(),
@@ -333,13 +334,17 @@ class ContactManagementApiController extends Controller
                 return $this->_createJsonResponse('error', array(
                     'errorTitle' => "Cannot Send Message",
                     'errorDescription' => "Please reload and send valid data again.",
+                    'errorTitleKey' => "CAN_NOT_SEND_MESSAGE",
+                    'errorDescriptionKey' => "PLEASE_RELOAD_AND_SEND_VALID_DATA_AGAIN",
                     'errorData'=>$messageForm
                 ), 400);
             }
         }else{
             return $this->_createJsonResponse('error', array(
                 'errorTitle' => "Wrong data",
-                'errorDescription' => "Please reload and send valid data again."
+                'errorDescription' => "Please reload and send valid data again.",
+                'errorTitleKey' => "WRONG_DATA",
+                'errorDescriptionKey' => "PLEASE_RELOAD_AND_SEND_VALID_DATA_AGAIN"
             ), 400);
 
         }
