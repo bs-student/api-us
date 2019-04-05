@@ -190,9 +190,17 @@ class BookManagementApiController extends Controller
         $fileContents = trim(str_replace('"', "'", $fileContents));
 
         $simpleXml = simplexml_load_string($fileContents);
+        $cartUrl = (string)$simpleXml->Cart->PurchaseURL;
+        $amazonApiInfo = $this->_getAmazonSearchParams();
 
+        if (empty($cartUrl))
+        {
+            $cartUrl = $amazonApiInfo['apiInfo']['redirect_url'] . $bookOfferId ."/". $amazonApiInfo['params']['AssociateTag'] ;
 
-        return $this->_createJsonResponse('success', array('successData' => array('cartUrl' => (string)$simpleXml->Cart->PurchaseURL)), 200);
+        }
+
+        return $this->_createJsonResponse('success', array('successData' => array('cartUrl' => $cartUrl)), 200);
+
 
     }
 
@@ -660,10 +668,11 @@ class BookManagementApiController extends Controller
                 'bookPages'=>array_key_exists('pageCount',$volumeInfo)?$volumeInfo['pageCount']:"",
                 'bookImages'=>array(
                     array(
-                        'image'=>array_key_exists('imageLinks',$volumeInfo)?$volumeInfo['imageLinks']['thumbnail']:"",
+                        'image'=>array_key_exists('imageLinks',$volumeInfo)?str_replace("zoom=1","zoom=3",$volumeInfo['imageLinks']['thumbnail']):"",
                         'imageId'=>0
                     )
-                )
+                ),
+                'bookOfferId'=>array_key_exists('identifier',$volumeInfo['industryIdentifiers'][$ISBN_10_key])?$volumeInfo['industryIdentifiers'][$ISBN_10_key]['identifier']:"",
             );
             array_push($booksArray,$bookData);
 
@@ -748,20 +757,19 @@ class BookManagementApiController extends Controller
                     'image'=>$insertedBook->getBookImage(),
                     'imageId'=>0
                 ));
+                //GET All IMAGES OF THAT BOOK's DEALS
+                for($i=0;$i<count($bookImages);$i++){
+                    array_push($images,array(
+                        'image'=>$bookImages[$i]['imageUrl'],
+                        'imageId'=>($i+1)
+                    ));
+                }
+                $booksArray['books'][0]['bookImages'] = $images;
+                $booksArray['books'][0]['bookId'] = $insertedBookId;
             }
 
 
-            //GET All IMAGES OF THAT BOOK's DEALS
 
-
-            for($i=0;$i<count($bookImages);$i++){
-                array_push($images,array(
-                    'image'=>$bookImages[$i]['imageUrl'],
-                    'imageId'=>($i+1)
-                ));
-            }
-            $booksArray['books'][0]['bookImages'] = $images;
-            $booksArray['books'][0]['bookId'] = $insertedBookId;
             $booksArray['books'][0]['bookDescription'] = strip_tags($booksArray['books'][0]['bookDescription']);
 
             //DONE 1.Insert Book into DB
@@ -1020,6 +1028,7 @@ class BookManagementApiController extends Controller
         $apiInfo['host'] = $amazonApiInfo['host'];
         $apiInfo['uri'] = $amazonApiInfo['uri'];
         $apiInfo['privateKey'] = $amazonApiInfo['private_key'];
+        $apiInfo['redirect_url'] = $amazonApiInfo['redirect_url'];
 
 
         $params = array();
@@ -1175,6 +1184,8 @@ class BookManagementApiController extends Controller
 
     public function _createJsonResponse($key, $data, $code)
     {
+
+
         $serializer = $this->container->get('jms_serializer');
         $json = $serializer->serialize([$key => $data], 'json');
         $response = new Response($json, $code);
