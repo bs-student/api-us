@@ -31,6 +31,7 @@ class BookManagementApiController extends Controller
     public function searchByKeywordAmazonApiAction(Request $request)
     {
         if ($this->_headerTokenDecode($request->headers->all())) {
+
             $content = $request->getContent();
             $data = json_decode($content, true);
 
@@ -657,7 +658,7 @@ class BookManagementApiController extends Controller
                 'bookAsin'=>array_key_exists('identifier',$volumeInfo['industryIdentifiers'][$ISBN_10_key])?$volumeInfo['industryIdentifiers'][$ISBN_10_key]['identifier']:"",
                 'bookTitle'=>array_key_exists('title',$volumeInfo)?$volumeInfo['title']:"",
                 'bookDirectorAuthorArtist'=>array_key_exists('authors',$volumeInfo)?$volumeInfo['authors'][0]:"",
-                'bookPriceAmazon'=>"Not Found",
+                'bookPriceAmazon'=>"",
                 'bookIsbn'=>array_key_exists('identifier',$volumeInfo['industryIdentifiers'][$ISBN_10_key])?$volumeInfo['industryIdentifiers'][$ISBN_10_key]['identifier']:"",
                 'bookEan'=>array_key_exists('identifier',$volumeInfo['industryIdentifiers'][$ISBN_13_key])?$volumeInfo['industryIdentifiers'][$ISBN_13_key]['identifier']:"",
                 'bookEdition'=>array_key_exists('edition',$volumeInfo)?$volumeInfo['edition']:"",
@@ -668,7 +669,7 @@ class BookManagementApiController extends Controller
                 'bookPages'=>array_key_exists('pageCount',$volumeInfo)?$volumeInfo['pageCount']:"",
                 'bookImages'=>array(
                     array(
-                        'image'=>array_key_exists('imageLinks',$volumeInfo)?str_replace("zoom=1","zoom=3",$volumeInfo['imageLinks']['thumbnail']):"",
+                        'image'=>array_key_exists('imageLinks',$volumeInfo)?str_replace(array("http","zoom=1","edge=curl"),array("https","zoom=3", "edge=full"),$volumeInfo['imageLinks']['thumbnail']):"",
                         'imageId'=>0
                     )
                 ),
@@ -1175,7 +1176,8 @@ class BookManagementApiController extends Controller
         if(!strcmp($headerData['request-source'][0],$webAppConfig['source_type'])){
             return !strcmp($headerData['header-token'][0], hash_hmac("sha256", base64_encode($headerData['timestamp'][0]), $webAppConfig['api_key']))?true:false;
         }else if(!strcmp($headerData['request-source'][0],$mobileAppConfig['source_type'])){
-            return !strcmp($headerData['header-token'][0], (md5(md5($headerData['timestamp'][0]).$mobileAppConfig['api_key'])))?true:false;
+           return !strcmp($headerData['header-token'][0], (md5(md5($headerData['timestamp'][0]).$mobileAppConfig['api_key'])))?true:false;
+
         }else{
             return false;
         }
